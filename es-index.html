@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#5b507a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>Lupita's Party Supplies — Atascadero, CA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fraunces:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Outfit:wght@300;400;500;600&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* ── LANG TOGGLE — desktop (inside nav-links) ── */
+        #langToggle {
+            background: transparent;
+            border: 1.5px solid rgba(91, 80, 122, .4);
+            color: var(--ink);
+            font: 700 .7rem/1 'Outfit', sans-serif;
+            letter-spacing: .12em;
+            padding: .38em .82em;
+            border-radius: 999px;
+            cursor: pointer;
+            transition: background .2s, color .2s, border-color .2s;
+            white-space: nowrap;
+            line-height: 1;
+        }
+        #langToggle:hover {
+            background: var(--lemon-lime);
+            border-color: var(--lemon-lime);
+            color: var(--ink);
+        }
+
+        /* ── LANG TOGGLE — mobile (next to hamburger) ── */
+        .nav-mob-right {
+            display: none;
+            align-items: center;
+            gap: .45rem;
+        }
+        #langToggleMob {
+            background: transparent;
+            border: 1.5px solid rgba(91, 80, 122, .4);
+            color: var(--ink);
+            font: 700 .68rem/1 'Outfit', sans-serif;
+            letter-spacing: .12em;
+            padding: .36em .76em;
+            border-radius: 999px;
+            cursor: pointer;
+            transition: background .2s, color .2s, border-color .2s;
+            white-space: nowrap;
+            min-height: 34px;
+        }
+        #langToggleMob:hover {
+            background: var(--lemon-lime);
+            border-color: var(--lemon-lime);
+        }
+        @media (max-width: 960px) {
+            .nav-mob-right { display: flex; }
+        }
+
+        /* ── LANG TOGGLE — inside drawer ── */
+        .drawer-lang-wrap {
+            padding: 0 1.25rem .5rem;
+        }
+        .drawer-lang-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            min-height: 48px;
+            border-radius: 100px;
+            background: transparent;
+            border: 1.5px solid rgba(91, 80, 122, .3);
+            color: var(--ink-soft);
+            font: 600 .82rem/1 'Outfit', sans-serif;
+            letter-spacing: .08em;
+            cursor: pointer;
+            transition: background .2s, color .2s;
+            gap: .5rem;
+        }
+        .drawer-lang-btn:hover {
+            background: var(--lemon-lime);
+            border-color: var(--lemon-lime);
+            color: var(--ink);
+        }
+    </style>
+</head>
+<body>
+
+<!-- cursor elements (controlled by JS) -->
+<div id="cursor"></div>
+<div id="cursorRing"></div>
+
+<!-- ────────────────────────────────
+     NAV
+──────────────────────────────── -->
+<nav id="mainNav">
+    <a href="#" class="nav-logo">Lupita<span>'s</span></a>
+
+    <!-- Desktop nav links -->
+    <ul class="nav-links">
+        <li><a href="#products"      data-i18n="nav-products">Products</a></li>
+        <li><a href="#pinatas">Piñatas</a></li>
+        <li><a href="#services-strip" data-i18n="nav-services">Services</a></li>
+        <li><a href="#hours"         data-i18n="nav-hours">Hours</a></li>
+        <li><a href="#seasonal"      data-i18n="nav-seasonal">Seasonal</a></li>
+        <li><a href="#location"      data-i18n="nav-visit">Visit Us</a></li>
+        <li><a href="tel:+18054642585" class="nav-cta" data-i18n="nav-call">Call Now</a></li>
+        <li><a href="#" class="nav-cta nav-se">Se Habla Español</a></li>
+        <li style="margin-left:.1rem">
+            <button id="langToggle" aria-label="Cambiar a Español">ES</button>
+        </li>
+    </ul>
+
+    <!-- Mobile: lang toggle + hamburger grouped together -->
+    <div class="nav-mob-right">
+        <button id="langToggleMob" aria-label="Cambiar a Español">ES</button>
+        <button class="nav-hamburger" id="hbBtn" aria-label="Open menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+
+<!-- Mobile Drawer -->
+<div class="nav-drawer" id="navDrawer" aria-hidden="true">
+    <ul>
+        <li><a href="#products"       class="dl" data-i18n="drawer-products">🎉 Products</a></li>
+        <li><a href="#pinatas"        class="dl">🪅 Piñatas</a></li>
+        <li><a href="#services-strip" class="dl" data-i18n="drawer-services">💸 Services</a></li>
+        <li><a href="#hours"          class="dl" data-i18n="drawer-hours">🕐 Hours</a></li>
+        <li><a href="#seasonal"       class="dl" data-i18n="drawer-seasonal">🌟 Seasonal</a></li>
+        <li><a href="#location"       class="dl" data-i18n="drawer-visit">📍 Visit Us</a></li>
+    </ul>
+    <div class="drawer-btns">
+        <a href="tel:+18054642585" class="db-call dl" data-i18n="drawer-call">📞 (805) 464-2585 — Call Now</a>
+        <a href="tel:+18057920472" class="db-ord  dl" data-i18n="drawer-orders">📱 (805) 792-0472 — Orders</a>
+    </div>
+    <!-- Language toggle inside the drawer -->
+    <div class="drawer-lang-wrap">
+        <button class="drawer-lang-btn dl" id="langToggleDrawer" aria-label="Cambiar a Español">
+            🌐 <span data-i18n="drawer-lang-label">Switch to Spanish — Español</span>
+        </button>
+    </div>
+    <p class="drawer-se">✨ Se Habla Español</p>
+</div>
+
+<!-- ────────────────────────────────
+     HERO
+──────────────────────────────── -->
+<section id="hero">
+    <div class="blob"
+         style="width:500px;height:500px;background:var(--lemon-lime);opacity:.12;top:-100px;right:30%;"></div>
+    <div class="blob"
+         style="width:300px;height:300px;background:var(--powder-blue);opacity:.15;bottom:10%;left:5%;"></div>
+
+    <div class="hero-left">
+        <p class="hero-eyebrow reveal" data-i18n="hero-eyebrow">Atascadero's Premier Party Store</p>
+        <h1 class="hero-h1 reveal rd1" data-i18n="hero-h1">
+            Every<br><span class="pop">Celebration</span><br><span class="uw">Deserves</span><br>Magic.
+        </h1>
+        <p class="hero-sub reveal rd2" data-i18n="hero-sub">From vibrant piñatas to custom candy bars — Lupita's Party Supplies has
+            everything you need to make your next event unforgettable.</p>
+        <div class="hero-badges reveal rd2">
+            <span class="badge bg">Piñatas</span>
+            <span class="badge bb" data-i18n="badge-candy">Candy Bars</span>
+            <span class="badge bgn" data-i18n="badge-balloons">Balloons</span>
+            <span class="badge bl" data-i18n="badge-rentals">Rentals</span>
+        </div>
+        <div class="hero-btns reveal rd3">
+            <a href="tel:+18054642585" class="btn-p">📞 (805) 464-2585</a>
+            <a href="#products" class="btn-o" data-i18n="hero-btn-explore">Explore Products</a>
+        </div>
+    </div>
+
+    <div class="hero-right">
+        <div class="hero-fi">
+            <span class="fi" style="top:12%;left:10%;animation-delay:0s;font-size:clamp(2.5rem,5.5vw,9rem)">🎉</span>
+            <span class="fi" style="top:20%;right:15%;animation-delay:0s;font-size:clamp(2.5rem,5.5vw,9rem)">🎈</span>
+            <span class="fi" style="top:50%;left:8%;animation-delay:0s;font-size:clamp(2.5rem,5.5vw,9rem)">🍭</span>
+            <span class="fi" style="bottom:20%;right:10%;animation-delay:0s;font-size:clamp(2.5rem,5.5vw,9rem)">🌟</span>
+            <span class="fi" style="top:45%;right:5%;animation-delay:0s;font-size:clamp(2.5rem,5.5vw,9rem)">🎊</span>
+            <span class="fi" style="bottom:10%;left:15%;animation-delay:0s;font-size:clamp(2.5rem,5.5vw,9rem)">🎂</span>
+        </div>
+        <div class="hero-right-inner">
+            <div class="hero-card">
+                <p class="cl" data-i18n="hero-card-label">⭐ Custom Orders Available</p>
+                <h3 class="ct" data-i18n="hero-card-title">Hand-Crafted Piñatas</h3>
+                <p class="cd" data-i18n="hero-card-desc">Star shapes, character figures, and cake designs for your special day.</p>
+                <span class="ctag" data-i18n="hero-card-tag">Order 3 weeks in advance</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="mq-wrap">
+    <div class="mq-track">
+        <span class="mq-item">Piñatas <span class="mq-dot">✦</span></span>
+        <span class="mq-item"><span data-i18n="mq-candy-bars">Candy Bars</span> <span class="mq-dot">✦</span></span>
+        <span class="mq-item"><span data-i18n="mq-balloon-arches">Balloon Arches</span> <span class="mq-dot">✦</span></span>
+        <span class="mq-item"><span data-i18n="mq-table-rentals">Table Rentals</span> <span class="mq-dot">✦</span></span>
+        <span class="mq-item"><span data-i18n="mq-money-transfers">Money Transfers</span> <span class="mq-dot">✦</span></span>
+        <span class="mq-item"><span data-i18n="mq-mexico-shipping">Mexico Shipping</span> <span class="mq-dot">✦</span></span>
+        <span class="mq-item"><span data-i18n="mq-gender-reveal">Gender Reveal</span> <span class="mq-dot">✦</span></span>
+        <span class="mq-item"><span data-i18n="mq-mexican-candy">Mexican Candy</span> <span class="mq-dot">✦</span></span>
+        <span class="mq-item"><span data-i18n="mq-phone-recharges">Phone Recharges</span> <span class="mq-dot">✦</span></span>
+        <!-- duplicate set for seamless loop -->
+        <span class="mq-item">Piñatas <span class="mq-dot">✦</span></span>
+        <span class="mq-item"><span data-i18n="mq-candy-bars">Candy Bars</span> <span class="mq-dot">✦</span></span>
+        <span class="mq-item"><span data-i18n="mq-balloon-arches">Balloon Arches</span> <span class="mq-dot">✦</span></span>
+        <span class="mq-item"><span data-i18n="mq-table-rentals">Table Rentals</span> <span class="mq-dot">✦</span></span>
+        <span class="mq-item"><span data-i18n="mq-money-transfers">Money Transfers</span> <span class="mq-dot">✦</span></span>
+        <span class="mq-item"><span data-i18n="mq-mexico-shipping">Mexico Shipping</span> <span class="mq-dot">✦</span></span>
+        <span class="mq-item"><span data-i18n="mq-gender-reveal">Gender Reveal</span> <span class="mq-dot">✦</span></span>
+        <span class="mq-item"><span data-i18n="mq-mexican-candy">Mexican Candy</span> <span class="mq-dot">✦</span></span>
+        <span class="mq-item"><span data-i18n="mq-phone-recharges">Phone Recharges</span> <span class="mq-dot">✦</span></span>
+    </div>
+</div>
+
+<!-- ────────────────────────────────
+     PRODUCTS
+──────────────────────────────── -->
+<section id="products">
+    <div class="ph reveal">
+        <div>
+            <p class="stag" data-i18n="prod-stag">Everything You Need</p>
+            <h2 class="sh2" style="color:var(--cream)" data-i18n="prod-h2">Party <em style="color:var(--light-green)">Essentials</em></h2>
+        </div>
+        <p class="pdesc" data-i18n="prod-desc">From birthdays and baby showers to quinceañeras — we have every supply to make your celebration
+            shine.</p>
+    </div>
+    <div class="pgrid">
+        <div class="pc g reveal"><span class="pe">🪅</span>
+            <div class="pbadge" data-i18n="badge-custom">Custom</div>
+            <h3 class="pt">Piñatas</h3>
+            <p class="pd" data-i18n="prod-pinata-desc">Star shapes, character figures, cake designs. Custom orders available 3 weeks in advance.</p>
+        </div>
+        <div class="pc l reveal rd1"><span class="pe">🍭</span>
+            <h3 class="pt" data-i18n="prod-candy-title">Candy &amp; Mexican Sweets</h3>
+            <p class="pd" data-i18n="prod-candy-desc">A wide variety of flavors including authentic Mexican candies for every table.</p>
+        </div>
+        <div class="pc g2 reveal rd2"><span class="pe">🍫</span>
+            <div class="pbadge" data-i18n="badge-custom">Custom</div>
+            <h3 class="pt" data-i18n="prod-cbar-title">Custom Candy Bars</h3>
+            <p class="pd" data-i18n="prod-cbar-desc">Personalized candy bars and stunning candy bar decorations for any occasion.</p>
+        </div>
+        <div class="pc gn reveal rd1"><span class="pe">🎈</span>
+            <h3 class="pt" data-i18n="prod-dec-title">Decorations</h3>
+            <p class="pd" data-i18n="prod-dec-desc">Balloon arches, table covers, gender-reveal products, and everything to transform your
+                space.</p>
+        </div>
+        <div class="pc b reveal rd2"><span class="pe">🪑</span>
+            <h3 class="pt" data-i18n="prod-rent-title">Table &amp; Chair Rentals</h3>
+            <p class="pd" data-i18n="prod-rent-desc">Rent tables and chairs for any size event. Easy setup for your celebration.</p>
+        </div>
+        <div class="pc dk reveal rd3"><span class="pe">🧸</span>
+            <div class="pbadge" style="background:var(--lemon-lime);color:var(--ink)" data-i18n="badge-seasonal-label">Seasonal</div>
+            <h3 class="pt" data-i18n="prod-toy-title">Toys &amp; Gifts</h3>
+            <p class="pd" data-i18n="prod-toy-desc">Toys, sodas, chips, and special Valentine's musical &amp; light-up teddy bears.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ────────────────────────────────
+     PIÑATA SPOTLIGHT
+──────────────────────────────── -->
+<section id="pinatas">
+    <div class="pv reveal">
+        <div class="pbc">
+            <span class="pbe">🪅</span>
+            <h3 class="pbt" data-i18n="pin-card-title">Handmade Piñatas</h3>
+            <p class="pbs" data-i18n="pin-card-sub">Made with love for every celebration</p>
+        </div>
+        <div class="pfb" data-i18n="pin-notice">⏰ Custom orders require 3-week advance notice</div>
+    </div>
+    <div class="pi reveal rd1">
+        <p class="stag" data-i18n="pin-stag">Our Specialty</p>
+        <h2 class="sh2" data-i18n="pin-h2">The Art of the <em>Piñata</em></h2>
+        <p style="margin-top:1rem;font-size:.93rem;color:var(--ink-soft);line-height:1.8;max-width:440px;"
+           data-i18n="pin-desc">Our piñatas
+            are handcrafted with vibrant colors and unique designs. Whether you want a classic star shape, a beloved
+            character figure, or a cake design — we bring your vision to life.</p>
+        <div class="pstyles">
+            <span class="pst active" data-i18n="pst-star">⭐ Star Shape</span>
+            <span class="pst"        data-i18n="pst-cake">🧁 Cake Design</span>
+            <span class="pst"        data-i18n="pst-char">🦸 Character Figures</span>
+            <span class="pst"        data-i18n="pst-bday">🎂 Birthday Themes</span>
+            <span class="pst"        data-i18n="pst-custom-design">✨ Custom Design</span>
+        </div>
+        <div class="cob">
+            <p class="cot" data-i18n="pin-cob-title">📋 Custom Piñata Orders</p>
+            <p class="cod" data-i18n="pin-cob-desc">Want something unique? We create custom piñatas for any theme. <strong>Please order at least
+                3 weeks in advance.</strong> Call <a href="tel:+18054642585"
+                                                     style="color:var(--dusty-grape);font-weight:600">(805) 464-2585</a>
+                to place your order.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ────────────────────────────────
+     SERVICES STRIP
+──────────────────────────────── -->
+<section id="services-strip">
+    <div class="sl">
+        <p class="stag" data-i18n="svc-stag">Beyond Party Supplies</p>
+        <h2 class="sh2" data-i18n="svc-h2">Community <em>Services</em></h2>
+        <p style="margin-top:.8rem;font-size:.9rem;color:var(--ink-soft);line-height:1.7;max-width:380px;"
+           data-i18n="svc-desc">We're more
+            than a party store — Lupita's is a community hub offering financial and shipping services.</p>
+        <div class="sgrid reveal">
+            <div class="spill"><span class="sp-em">💸</span><span>Viamericas Transfers</span></div>
+            <div class="spill"><span class="sp-em">💰</span><span>Intermex</span></div>
+            <div class="spill"><span class="sp-em">🏦</span><span>Barri Money Services</span></div>
+            <div class="spill"><span class="sp-em">📦</span><span>CJ Express to Mexico</span></div>
+            <div class="spill"><span class="sp-em">📱</span><span data-i18n="svc-phone-recharges">Phone Recharges</span></div>
+            <div class="spill"><span class="sp-em">💳</span><span data-i18n="svc-bill">Bill Payments</span></div>
+        </div>
+    </div>
+    <div class="srbox reveal rd2">
+        <h3 class="srbt" data-i18n="svc-box-title">Shipping All Across México 🇲🇽</h3>
+        <ul class="srlist">
+            <li data-i18n="svc-li-1">Package delivery to <strong>all of Mexico</strong> via CJ Express</li>
+            <li data-i18n="svc-li-2">Money transfers through <strong>3 trusted providers</strong></li>
+            <li data-i18n="svc-li-3">Quick and reliable <strong>bill payment</strong> services</li>
+            <li data-i18n="svc-li-4"><strong>Recargas Telefónicas</strong> — stay connected</li>
+            <li data-i18n="svc-li-5">Service in <strong>English and Spanish</strong></li>
+        </ul>
+        <a href="tel:+18057920472" class="sr-cta" data-i18n="svc-cta">📞 Order Line: (805) 792-0472</a>
+    </div>
+</section>
+
+<!-- ────────────────────────────────
+     HOURS
+──────────────────────────────── -->
+<section id="hours">
+    <div class="hl">
+        <p class="stag" data-i18n="hr-stag">We're Open</p>
+        <h2 class="sh2" data-i18n="hr-h2">Store <em>Hours</em></h2>
+        <p style="margin-top:.6rem;font-size:.88rem;color:var(--ink-soft);line-height:1.7;"
+           data-i18n="hr-sub">Visit us on El Camino Real in Atascadero.</p>
+        <div class="htbl reveal">
+            <!-- data-day holds the English weekday name for JS today-detection -->
+            <div class="hr" data-day="Monday">
+                <span class="dn" data-i18n="day-mon">Monday</span>
+                <span class="dt">10:30 AM – 7:30 PM</span>
+            </div>
+            <div class="hr" data-day="Tuesday">
+                <span class="dn" data-i18n="day-tue">Tuesday</span>
+                <span class="dt">10:30 AM – 5:30 PM</span>
+            </div>
+            <div class="hr" data-day="Wednesday">
+                <span class="dn" data-i18n="day-wed">Wednesday</span>
+                <span class="dt">10:30 AM – 7:30 PM</span>
+            </div>
+            <div class="hr" data-day="Thursday">
+                <span class="dn" data-i18n="day-thu">Thursday</span>
+                <span class="dt">10:30 AM – 7:30 PM</span>
+            </div>
+            <div class="hr" data-day="Friday">
+                <span class="dn" data-i18n="day-fri">Friday</span>
+                <span class="dt">10:30 AM – 5:30 PM</span>
+            </div>
+            <div class="hr" data-day="Saturday">
+                <span class="dn" data-i18n="day-sat">Saturday</span>
+                <span class="dt">10:30 AM – 7:30 PM</span>
+            </div>
+            <div class="hr" data-day="Sunday">
+                <span class="dn" data-i18n="day-sun">Sunday</span>
+                <span class="dt">10:30 AM – 1:00 PM</span>
+            </div>
+        </div>
+    </div>
+    <div class="hrb reveal rd2">
+        <div class="hrb-ic">📞</div>
+        <h3 class="hrb-tt" data-i18n="hr-touch-title">Get in Touch</h3>
+        <a href="tel:+18054642585" class="hrb-ph">(805) 464-2585</a>
+        <p class="hrb-sub" data-i18n="hr-primary-sub">Primary phone line</p>
+        <a href="tel:+18057920472" class="hrb-ph2">(805) 792-0472</a>
+        <p class="hrb-sub" data-i18n="hr-orders-sub">Orders &amp; secondary line</p>
+        <div class="hrb-em">✉️ <a href="/cdn-cgi/l/email-protection#402b2a2429213a79757900272d21292c6e232f2d"><span class="__cf_email__" data-cfemail="402b2a2429213a79757900272d21292c6e232f2d">[email&#160;protected]</span></a></div>
+        <div class="hrb-se">✨ Se Habla Español</div>
+        <div style="margin-top:1.2rem;padding-top:1.2rem;border-top:1px solid rgba(255,255,255,.1);">
+            <p style="font-size:.78rem;color:rgba(253,248,239,.5);">Owners: <strong style="color:rgba(253,248,239,.8)">Pedro
+                Diaz &amp; Noemi Lopez</strong></p>
+        </div>
+    </div>
+</section>
+
+<!-- ────────────────────────────────
+     SEASONAL
+──────────────────────────────── -->
+<section id="seasonal">
+    <div class="sea-hd reveal">
+        <p class="stag" data-i18n="sea-stag">All Year Round</p>
+        <h2 class="sh2" data-i18n="sea-h2">Seasonal <em>Celebrations</em></h2>
+        <p style="margin-top:.8rem;font-size:.9rem;color:var(--ink-soft);max-width:500px;margin-left:auto;margin-right:auto;line-height:1.7;"
+           data-i18n="sea-desc">
+            Our inventory rotates throughout the year so you'll always find something perfect for the season's biggest
+            moments.</p>
+    </div>
+    <div class="segrid">
+        <div class="secard sc0 reveal"><span class="se-em">💝</span>
+            <h3 class="se-tt" data-i18n="sea-val-title">Valentine's Day</h3>
+            <p class="se-it" data-i18n="sea-val-items">Musical bears · Light-up bears · Gifts</p>
+        </div>
+        <div class="secard sc1 reveal rd1"><span class="se-em">🎓</span>
+            <h3 class="se-tt" data-i18n="sea-grad-title">Graduation</h3>
+            <p class="se-it" data-i18n="sea-grad-items">Sashes · Leis · Balloons · Gifts</p>
+        </div>
+        <div class="secard sc2 reveal rd2"><span class="se-em">💐</span>
+            <h3 class="se-tt" data-i18n="sea-mom-title">Mother's Day</h3>
+            <p class="se-it" data-i18n="sea-mom-items">Specialized gifts &amp; decorations</p>
+        </div>
+        <div class="secard sc3 reveal rd3"><span class="se-em">🇲🇽</span>
+            <h3 class="se-tt" data-i18n="sea-mex-title">Mexican Independence</h3>
+            <p class="se-it" data-i18n="sea-mex-items">Sept 15 · Themed decor · Piñatas</p>
+        </div>
+        <div class="secard sc4 reveal rd4"><span class="se-em">🎄</span>
+            <h3 class="se-tt" data-i18n="sea-xmas-title">Christmas &amp; Posadas</h3>
+            <p class="se-it" data-i18n="sea-xmas-items">Piñatas · Candies · Holiday decor</p>
+        </div>
+    </div>
+</section>
+
+<!-- ────────────────────────────────
+     LOCATION
+──────────────────────────────── -->
+<section id="location">
+    <div class="li">
+        <p class="stag" data-i18n="loc-stag">Find Us</p>
+        <h2 class="sh2" data-i18n="loc-h2">Visit <em>Lupita's</em></h2>
+        <div class="ladr reveal">
+            <strong>8575 El Camino Real</strong>
+            Atascadero, California 93422
+        </div>
+        <div class="lcon reveal">
+            <a href="tel:+18054642585" class="lci">
+                <span class="lci-i">📞</span>
+                <div>
+                    <span class="lci-l" data-i18n="loc-phone-label">Primary Phone</span>
+                    <span class="lci-v">(805) 464-2585</span>
+                </div>
+            </a>
+            <a href="tel:+18057920472" class="lci">
+                <span class="lci-i">📱</span>
+                <div>
+                    <span class="lci-l" data-i18n="loc-orders-label">Orders / Secondary</span>
+                    <span class="lci-v">(805) 792-0472</span>
+                </div>
+            </a>
+            <a href="/cdn-cgi/l/email-protection#402b2a2429213a79757900272d21292c6e232f2d" class="lci">
+                <span class="lci-i">✉️</span>
+                <div>
+                    <span class="lci-l" data-i18n="loc-email-label">Email</span>
+                    <span class="lci-v"><span class="__cf_email__" data-cfemail="402b2a2429213a79757900272d21292c6e232f2d">[email&#160;protected]</span></span>
+                </div>
+            </a>
+        </div>
+        <div class="lowns reveal rd2" data-i18n="loc-owned">
+            Owned &amp; operated with love by <strong>Pedro Diaz &amp; Noemi Lopez</strong><br>
+            <span style="color:var(--light-green);font-style:italic;">Se Habla Español · English Spoken</span>
+        </div>
+    </div>
+
+    <div class="lmap reveal rd2">
+        <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3388.8782373368813!2d-120.65614362420678!3d35.47307254138065!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80ece92f1b265689%3A0x48b8084d8afcc74f!2sLupita&#39;s%20Party%20Supplies!5e1!3m2!1sen!2sus!4v1773629391984!5m2!1sen!2sus"
+                width="100%" height="100%"
+                style="border:0;position:absolute;inset:0;"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+        <a href="https://maps.app.goo.gl/eNtuzeDx3cLbue9W7" target="_blank" rel="noopener"
+           class="lmap-dir" data-i18n="loc-dir">🗺️ Get Directions</a>
+    </div>
+</section>
+
+<!-- MOBILE CTA STRIP (shown < 600px) -->
+<div class="mob-cta">
+    <a href="tel:+18054642585" class="mc-call" data-i18n="mob-call">📞 Call Now — (805) 464-2585</a>
+    <a href="https://maps.app.goo.gl/eNtuzeDx3cLbue9W7" target="_blank" rel="noopener"
+       class="mc-dir" data-i18n="mob-dir">🗺️ Get Directions</a>
+</div>
+
+<!-- ────────────────────────────────
+     FOOTER
+──────────────────────────────── -->
+<footer>
+    <div class="ft">
+        <div>
+            <a href="#" class="nav-logo">Lupita<span>'s</span> Party Supplies</a>
+            <p class="ftag" data-i18n="ft-desc">Your neighborhood party destination in Atascadero — bringing joy, color, and community
+                together.<br><br><em style="color:var(--light-green)">Se Habla Español · We Speak English</em></p>
+        </div>
+        <div>
+            <p class="fct" data-i18n="ft-links-title">Quick Links</p>
+            <ul class="flinks">
+                <li><a href="#products"       data-i18n="ft-link-products">Party Products</a></li>
+                <li><a href="#pinatas"        data-i18n="ft-link-pinatas">Custom Piñatas</a></li>
+                <li><a href="#services-strip" data-i18n="ft-link-services">Financial Services</a></li>
+                <li><a href="#hours"          data-i18n="ft-link-hours">Store Hours</a></li>
+                <li><a href="#seasonal"       data-i18n="ft-link-seasonal">Seasonal Items</a></li>
+            </ul>
+        </div>
+        <div>
+            <p class="fct" data-i18n="ft-contact-title">Contact</p>
+            <ul class="flinks">
+                <li><a href="tel:+18054642585">(805) 464-2585</a></li>
+                <li><a href="tel:+18057920472">(805) 792-0472</a></li>
+                <li><a href="/cdn-cgi/l/email-protection#402b2a2429213a79757900272d21292c6e232f2d"><span class="__cf_email__" data-cfemail="402b2a2429213a79757900272d21292c6e232f2d">[email&#160;protected]</span></a></li>
+                <li><a href="https://maps.app.goo.gl/eNtuzeDx3cLbue9W7" target="_blank" rel="noopener" data-i18n="ft-link-directions">Get Directions</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="fb">
+        <p>© <span id="year"></span> Lupita's Party Supplies · 8575 El Camino Real, Atascadero, CA 93422</p>
+        <p class="fse" data-i18n="ft-se">Se Habla Español · We Speak English</p>
+    </div>
+</footer>
+
+<!-- ════════════════════════════════════════════════════════════
+     SCRIPTS  (replaces external script.js — all logic inlined)
+════════════════════════════════════════════════════════════ -->
+<script>
+    /* ─────────────────────────────────────────────────────
+       TRANSLATION DICTIONARY
+       Every key maps to { en, es } strings.
+       innerHTML is used so HTML markup inside values works.
+    ───────────────────────────────────────────────────── */
+    const TRANSLATIONS = {
+        /* — Nav — */
+        'nav-products':       { en: 'Products',    es: 'Productos' },
+        'nav-services':       { en: 'Services',    es: 'Servicios' },
+        'nav-hours':          { en: 'Hours',       es: 'Horarios' },
+        'nav-seasonal':       { en: 'Seasonal',    es: 'Temporadas' },
+        'nav-visit':          { en: 'Visit Us',    es: 'Visítanos' },
+        'nav-call':           { en: 'Call Now',    es: 'Llamar' },
+
+        /* — Drawer — */
+        'drawer-products':    { en: '🎉 Products',             es: '🎉 Productos' },
+        'drawer-services':    { en: '💸 Services',             es: '💸 Servicios' },
+        'drawer-hours':       { en: '🕐 Hours',                es: '🕐 Horarios' },
+        'drawer-seasonal':    { en: '🌟 Seasonal',             es: '🌟 Temporadas' },
+        'drawer-visit':       { en: '📍 Visit Us',             es: '📍 Visítanos' },
+        'drawer-call':        { en: '📞 (805) 464-2585 — Call Now', es: '📞 (805) 464-2585 — Llamar' },
+        'drawer-orders':      { en: '📱 (805) 792-0472 — Orders',   es: '📱 (805) 792-0472 — Pedidos' },
+        'drawer-lang-label':  { en: 'Switch to Spanish — Español',  es: 'Switch to English — Inglés' },
+
+        /* — Hero — */
+        'hero-eyebrow':       { en: "Atascadero's Premier Party Store",
+            es: 'La Tienda de Fiestas Premier de Atascadero' },
+        'hero-h1':            { en: 'Every<br><span class="pop">Celebration</span><br><span class="uw">Deserves</span><br>Magic.',
+            es: 'Cada<br><span class="pop">Celebración</span><br><span class="uw">Merece</span><br>Magia.' },
+        'hero-sub':           { en: "From vibrant piñatas to custom candy bars — Lupita's Party Supplies has everything you need to make your next event unforgettable.",
+            es: "Desde piñatas vibrantes hasta barras de dulces personalizadas — Lupita's Party Supplies tiene todo lo que necesitas para hacer tu próximo evento inolvidable." },
+        'badge-candy':        { en: 'Candy Bars', es: 'Dulces' },
+        'badge-balloons':     { en: 'Balloons',   es: 'Globos' },
+        'badge-rentals':      { en: 'Rentals',    es: 'Rentas' },
+        'hero-btn-explore':   { en: 'Explore Products', es: 'Explorar Productos' },
+        'hero-card-label':    { en: '⭐ Custom Orders Available', es: '⭐ Pedidos Personalizados' },
+        'hero-card-title':    { en: 'Hand-Crafted Piñatas',       es: 'Piñatas Artesanales' },
+        'hero-card-desc':     { en: 'Star shapes, character figures, and cake designs for your special day.',
+            es: 'Formas de estrella, figuras de personajes y diseños de pastel para tu día especial.' },
+        'hero-card-tag':      { en: 'Order 3 weeks in advance', es: 'Pide con 3 semanas de anticipación' },
+
+        /* — Marquee — */
+        'mq-candy-bars':      { en: 'Candy Bars',       es: 'Barras de Dulces' },
+        'mq-balloon-arches':  { en: 'Balloon Arches',   es: 'Arcos de Globos' },
+        'mq-table-rentals':   { en: 'Table Rentals',    es: 'Renta de Mesas' },
+        'mq-money-transfers': { en: 'Money Transfers',  es: 'Transferencias' },
+        'mq-mexico-shipping': { en: 'Mexico Shipping',  es: 'Envíos a México' },
+        'mq-gender-reveal':   { en: 'Gender Reveal',    es: 'Revelación de Género' },
+        'mq-mexican-candy':   { en: 'Mexican Candy',    es: 'Dulces Mexicanos' },
+        'mq-phone-recharges': { en: 'Phone Recharges',  es: 'Recargas Telefónicas' },
+
+        /* — Products — */
+        'prod-stag':          { en: 'Everything You Need', es: 'Todo lo que Necesitas' },
+        'prod-h2':            { en: 'Party <em style="color:var(--light-green)">Essentials</em>',
+            es: 'Esenciales de <em style="color:var(--light-green)">Fiesta</em>' },
+        'prod-desc':          { en: 'From birthdays and baby showers to quinceañeras — we have every supply to make your celebration shine.',
+            es: 'Desde cumpleaños y baby showers hasta quinceañeras — tenemos todo para que tu celebración brille.' },
+        'badge-custom':       { en: 'Custom',   es: 'Personalizado' },
+        'badge-seasonal-label':{ en: 'Seasonal',  es: 'Temporada' },
+        'prod-pinata-desc':   { en: 'Star shapes, character figures, cake designs. Custom orders available 3 weeks in advance.',
+            es: 'Formas de estrella, figuras de personajes, diseños de pastel. Pedidos personalizados con 3 semanas de anticipación.' },
+        'prod-candy-title':   { en: 'Candy &amp; Mexican Sweets',  es: 'Dulces y Golosinas Mexicanas' },
+        'prod-candy-desc':    { en: 'A wide variety of flavors including authentic Mexican candies for every table.',
+            es: 'Gran variedad de sabores, incluyendo auténticos dulces mexicanos para cada mesa.' },
+        'prod-cbar-title':    { en: 'Custom Candy Bars',            es: 'Barras de Dulces Personalizadas' },
+        'prod-cbar-desc':     { en: 'Personalized candy bars and stunning candy bar decorations for any occasion.',
+            es: 'Barras de dulces personalizadas y decoraciones impresionantes para cualquier ocasión.' },
+        'prod-dec-title':     { en: 'Decorations',  es: 'Decoraciones' },
+        'prod-dec-desc':      { en: 'Balloon arches, table covers, gender-reveal products, and everything to transform your space.',
+            es: 'Arcos de globos, manteles, productos para revelación de género y todo para transformar tu espacio.' },
+        'prod-rent-title':    { en: 'Table &amp; Chair Rentals', es: 'Renta de Mesas y Sillas' },
+        'prod-rent-desc':     { en: 'Rent tables and chairs for any size event. Easy setup for your celebration.',
+            es: 'Renta mesas y sillas para eventos de cualquier tamaño. Fácil de instalar para tu celebración.' },
+        'prod-toy-title':     { en: 'Toys &amp; Gifts',  es: 'Juguetes y Regalos' },
+        'prod-toy-desc':      { en: "Toys, sodas, chips, and special Valentine's musical &amp; light-up teddy bears.",
+            es: 'Juguetes, refrescos, botanas y especiales osos de peluche musicales y luminosos de San Valentín.' },
+
+        /* — Piñatas — */
+        'pin-card-title':     { en: 'Handmade Piñatas',               es: 'Piñatas Artesanales' },
+        'pin-card-sub':       { en: 'Made with love for every celebration', es: 'Hechas con amor para cada celebración' },
+        'pin-notice':         { en: '⏰ Custom orders require 3-week advance notice',
+            es: '⏰ Los pedidos personalizados requieren 3 semanas de anticipación' },
+        'pin-stag':           { en: 'Our Specialty',       es: 'Nuestra Especialidad' },
+        'pin-h2':             { en: 'The Art of the <em>Piñata</em>', es: 'El Arte de la <em>Piñata</em>' },
+        'pin-desc':           { en: 'Our piñatas are handcrafted with vibrant colors and unique designs. Whether you want a classic star shape, a beloved character figure, or a cake design — we bring your vision to life.',
+            es: 'Nuestras piñatas son hechas a mano con colores vibrantes y diseños únicos. Ya sea que quieras una clásica forma de estrella, una figura de personaje o un diseño de pastel — damos vida a tu visión.' },
+        'pst-star':           { en: '⭐ Star Shape',        es: '⭐ Forma de Estrella' },
+        'pst-cake':           { en: '🧁 Cake Design',       es: '🧁 Diseño de Pastel' },
+        'pst-char':           { en: '🦸 Character Figures', es: '🦸 Figuras de Personajes' },
+        'pst-bday':           { en: '🎂 Birthday Themes',   es: '🎂 Temas de Cumpleaños' },
+        'pst-custom-design':  { en: '✨ Custom Design',      es: '✨ Diseño Personalizado' },
+        'pin-cob-title':      { en: '📋 Custom Piñata Orders', es: '📋 Pedidos de Piñatas Personalizadas' },
+        'pin-cob-desc':       { en: 'Want something unique? We create custom piñatas for any theme. <strong>Please order at least 3 weeks in advance.</strong> Call <a href="tel:+18054642585" style="color:var(--dusty-grape);font-weight:600">(805) 464-2585</a> to place your order.',
+            es: '¿Quieres algo único? Creamos piñatas personalizadas para cualquier tema. <strong>Por favor, pide con al menos 3 semanas de anticipación.</strong> Llama al <a href="tel:+18054642585" style="color:var(--dusty-grape);font-weight:600">(805) 464-2585</a> para hacer tu pedido.' },
+
+        /* — Services — */
+        'svc-stag':           { en: 'Beyond Party Supplies',  es: 'Más que Artículos de Fiesta' },
+        'svc-h2':             { en: 'Community <em>Services</em>',  es: 'Servicios <em>Comunitarios</em>' },
+        'svc-desc':           { en: "We're more than a party store — Lupita's is a community hub offering financial and shipping services.",
+            es: "Somos más que una tienda de fiestas — Lupita's es un centro comunitario que ofrece servicios financieros y de envío." },
+        'svc-phone-recharges':{ en: 'Phone Recharges',  es: 'Recargas Telefónicas' },
+        'svc-bill':           { en: 'Bill Payments',    es: 'Pagos de Facturas' },
+        'svc-box-title':      { en: 'Shipping All Across México 🇲🇽', es: 'Envíos a Todo México 🇲🇽' },
+        'svc-li-1':           { en: 'Package delivery to <strong>all of Mexico</strong> via CJ Express',
+            es: 'Envío de paquetes a <strong>todo México</strong> vía CJ Express' },
+        'svc-li-2':           { en: 'Money transfers through <strong>3 trusted providers</strong>',
+            es: 'Transferencias de dinero con <strong>3 proveedores confiables</strong>' },
+        'svc-li-3':           { en: 'Quick and reliable <strong>bill payment</strong> services',
+            es: 'Pagos de facturas <strong>rápidos y confiables</strong>' },
+        'svc-li-4':           { en: '<strong>Recargas Telefónicas</strong> — stay connected',
+            es: '<strong>Recargas Telefónicas</strong> — mantente comunicado' },
+        'svc-li-5':           { en: 'Service in <strong>English and Spanish</strong>',
+            es: 'Servicio en <strong>inglés y español</strong>' },
+        'svc-cta':            { en: '📞 Order Line: (805) 792-0472', es: '📞 Línea de Pedidos: (805) 792-0472' },
+
+        /* — Hours — */
+        'hr-stag':            { en: "We're Open",   es: 'Estamos Abiertos' },
+        'hr-h2':              { en: 'Store <em>Hours</em>', es: '<em>Horarios</em> de la Tienda' },
+        'hr-sub':             { en: 'Visit us on El Camino Real in Atascadero.',
+            es: 'Visítanos en El Camino Real en Atascadero.' },
+        'day-mon':            { en: 'Monday',    es: 'Lunes' },
+        'day-tue':            { en: 'Tuesday',   es: 'Martes' },
+        'day-wed':            { en: 'Wednesday', es: 'Miércoles' },
+        'day-thu':            { en: 'Thursday',  es: 'Jueves' },
+        'day-fri':            { en: 'Friday',    es: 'Viernes' },
+        'day-sat':            { en: 'Saturday',  es: 'Sábado' },
+        'day-sun':            { en: 'Sunday',    es: 'Domingo' },
+        'hr-touch-title':     { en: 'Get in Touch',          es: 'Contáctanos' },
+        'hr-primary-sub':     { en: 'Primary phone line',    es: 'Línea principal' },
+        'hr-orders-sub':      { en: 'Orders &amp; secondary line', es: 'Pedidos y línea secundaria' },
+
+        /* — Seasonal — */
+        'sea-stag':           { en: 'All Year Round',          es: 'Todo el Año' },
+        'sea-h2':             { en: 'Seasonal <em>Celebrations</em>', es: '<em>Celebraciones</em> de Temporada' },
+        'sea-desc':           { en: "Our inventory rotates throughout the year so you'll always find something perfect for the season's biggest moments.",
+            es: 'Nuestro inventario rota durante el año para que siempre encuentres algo perfecto para los momentos más especiales de cada temporada.' },
+        'sea-val-title':      { en: "Valentine's Day",    es: 'Día de San Valentín' },
+        'sea-val-items':      { en: 'Musical bears · Light-up bears · Gifts', es: 'Osos musicales · Osos luminosos · Regalos' },
+        'sea-grad-title':     { en: 'Graduation',         es: 'Graduación' },
+        'sea-grad-items':     { en: 'Sashes · Leis · Balloons · Gifts', es: 'Bandas · Collares · Globos · Regalos' },
+        'sea-mom-title':      { en: "Mother's Day",        es: 'Día de las Madres' },
+        'sea-mom-items':      { en: 'Specialized gifts &amp; decorations', es: 'Regalos y decoraciones especializadas' },
+        'sea-mex-title':      { en: 'Mexican Independence', es: 'Independencia de México' },
+        'sea-mex-items':      { en: 'Sept 15 · Themed decor · Piñatas', es: '15 de Sept · Decoración temática · Piñatas' },
+        'sea-xmas-title':     { en: 'Christmas &amp; Posadas', es: 'Navidad y Posadas' },
+        'sea-xmas-items':     { en: 'Piñatas · Candies · Holiday decor', es: 'Piñatas · Dulces · Decoración navideña' },
+
+        /* — Location — */
+        'loc-stag':           { en: 'Find Us',          es: 'Encuéntranos' },
+        'loc-h2':             { en: 'Visit <em>Lupita\'s</em>', es: 'Visita <em>Lupita\'s</em>' },
+        'loc-phone-label':    { en: 'Primary Phone',    es: 'Teléfono Principal' },
+        'loc-orders-label':   { en: 'Orders / Secondary', es: 'Pedidos / Secundario' },
+        'loc-email-label':    { en: 'Email',            es: 'Correo' },
+        'loc-owned':          { en: 'Owned &amp; operated with love by <strong>Pedro Diaz &amp; Noemi Lopez</strong><br><span style="color:var(--light-green);font-style:italic;">Se Habla Español · English Spoken</span>',
+            es: 'Con amor de <strong>Pedro Diaz y Noemi Lopez</strong><br><span style="color:var(--light-green);font-style:italic;">Se Habla Español · English Spoken</span>' },
+        'loc-dir':            { en: '🗺️ Get Directions', es: '🗺️ Cómo Llegar' },
+
+        /* — Mobile CTA — */
+        'mob-call':           { en: '📞 Call Now — (805) 464-2585', es: '📞 Llamar — (805) 464-2585' },
+        'mob-dir':            { en: '🗺️ Get Directions',            es: '🗺️ Cómo Llegar' },
+
+        /* — Footer — */
+        'ft-desc':            { en: 'Your neighborhood party destination in Atascadero — bringing joy, color, and community together.<br><br><em style="color:var(--light-green)">Se Habla Español · We Speak English</em>',
+            es: 'Tu destino de fiestas en Atascadero — uniendo alegría, color y comunidad.<br><br><em style="color:var(--light-green)">Se Habla Español · We Speak English</em>' },
+        'ft-links-title':     { en: 'Quick Links',         es: 'Enlaces Rápidos' },
+        'ft-link-products':   { en: 'Party Products',      es: 'Productos de Fiesta' },
+        'ft-link-pinatas':    { en: 'Custom Piñatas',       es: 'Piñatas Personalizadas' },
+        'ft-link-services':   { en: 'Financial Services',  es: 'Servicios Financieros' },
+        'ft-link-hours':      { en: 'Store Hours',          es: 'Horarios' },
+        'ft-link-seasonal':   { en: 'Seasonal Items',       es: 'Artículos de Temporada' },
+        'ft-contact-title':   { en: 'Contact',              es: 'Contacto' },
+        'ft-link-directions': { en: 'Get Directions',       es: 'Cómo Llegar' },
+        'ft-se':              { en: 'Se Habla Español · We Speak English', es: 'Se Habla Español · We Speak English' },
+    };
+
+    /* ─────────────────────────────────────────────────────
+       LANGUAGE ENGINE
+    ───────────────────────────────────────────────────── */
+    let currentLang = localStorage.getItem('lupitas-lang') || 'en';
+
+    function highlightToday() {
+        /* Uses data-day (always English) so it works in both languages */
+        const DAYS = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+        const today = DAYS[new Date().getDay()];
+        document.querySelectorAll('.hr').forEach(row => {
+            row.classList.toggle('today', row.dataset.day === today);
+        });
+    }
+
+    function setLang(lang) {
+        currentLang = lang;
+
+        /* Update <html lang> */
+        document.documentElement.lang = lang === 'es' ? 'es-MX' : 'en';
+
+        /* Update page title */
+        document.title = lang === 'es'
+            ? "Lupita's Party Supplies — Atascadero, CA"
+            : "Lupita's Party Supplies — Atascadero, CA";
+
+        /* Swap all [data-i18n] elements */
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.dataset.i18n;
+            const map = TRANSLATIONS[key];
+            if (map && map[lang] !== undefined) {
+                el.innerHTML = map[lang];
+            }
+        });
+
+        /* Update all three toggle buttons */
+        const toggleLabel = lang === 'en' ? 'ES' : 'EN';
+        const toggleAria  = lang === 'en' ? 'Cambiar a Español' : 'Switch to English';
+        ['langToggle','langToggleMob'].forEach(id => {
+            const btn = document.getElementById(id);
+            if (btn) {
+                btn.textContent = toggleLabel;
+                btn.setAttribute('aria-label', toggleAria);
+            }
+        });
+
+        /* Re-highlight today (day names may have changed) */
+        highlightToday();
+
+        /* Persist preference */
+        try { localStorage.setItem('lupitas-lang', lang); } catch(e) {}
+    }
+
+    /* Wire up all three toggles */
+    function handleLangToggle() {
+        setLang(currentLang === 'en' ? 'es' : 'en');
+    }
+    document.getElementById('langToggle').addEventListener('click', handleLangToggle);
+    document.getElementById('langToggleMob').addEventListener('click', handleLangToggle);
+    document.getElementById('langToggleDrawer').addEventListener('click', handleLangToggle);
+
+    /* Apply saved/default language on page load */
+    if (currentLang !== 'en') setLang(currentLang);
+
+    /* ── CUSTOM CURSOR (fine pointer only) ── */
+    if (window.matchMedia('(pointer:fine)').matches) {
+        const C = document.getElementById('cursor'), R = document.getElementById('cursorRing');
+        if (C && R) {
+            document.addEventListener('mousemove', e => {
+                C.style.left = e.clientX + 'px';
+                C.style.top  = e.clientY + 'px';
+                setTimeout(() => {
+                    R.style.left = e.clientX + 'px';
+                    R.style.top  = e.clientY + 'px';
+                }, 60);
+            });
+            document.querySelectorAll('a, button').forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    C.style.transform  = 'translate(-50%,-50%) scale(2)';
+                    C.style.background = 'var(--dusty-grape)';
+                    R.style.transform  = 'translate(-50%,-50%) scale(1.5)';
+                });
+                el.addEventListener('mouseleave', () => {
+                    C.style.transform  = 'translate(-50%,-50%) scale(1)';
+                    C.style.background = 'var(--lemon-lime)';
+                    R.style.transform  = 'translate(-50%,-50%) scale(1)';
+                });
+            });
+        }
+    }
+
+    /* ── NAV SCROLL ── */
+    const nav = document.getElementById('mainNav');
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 50), { passive: true });
+
+    /* ── HAMBURGER ── */
+    const hbBtn   = document.getElementById('hbBtn');
+    const drawer  = document.getElementById('navDrawer');
+    let drawerOpen = false;
+
+    function setDrawer(v) {
+        drawerOpen = v;
+        hbBtn.classList.toggle('open', v);
+        drawer.classList.toggle('open', v);
+        hbBtn.setAttribute('aria-expanded', v);
+        drawer.setAttribute('aria-hidden', !v);
+        document.body.style.overflow = v ? 'hidden' : '';
+    }
+
+    hbBtn.addEventListener('click', () => setDrawer(!drawerOpen));
+    document.querySelectorAll('.dl').forEach(l => l.addEventListener('click', () => setDrawer(false)));
+    document.addEventListener('click', e => {
+        if (drawerOpen && !drawer.contains(e.target) && !hbBtn.contains(e.target)) setDrawer(false);
+    });
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && drawerOpen) setDrawer(false);
+    });
+
+    /* ── SCROLL REVEAL ── */
+    if ('IntersectionObserver' in window) {
+        const obs = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('visible');
+                    obs.unobserve(e.target);
+                }
+            });
+        }, { threshold: .1, rootMargin: '0px 0px -40px 0px' });
+        document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+    } else {
+        document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+    }
+
+    /* ── TODAY'S HOURS (uses data-day attribute, language-agnostic) ── */
+    highlightToday();
+
+    /* ── PIÑATA STYLE TAGS ── */
+    document.querySelectorAll('.pst').forEach(tag => {
+        tag.addEventListener('click', () => {
+            document.querySelectorAll('.pst').forEach(t => t.classList.remove('active'));
+            tag.classList.add('active');
+        });
+    });
+
+    /* ── SMOOTH ANCHOR WITH NAV OFFSET ── */
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', e => {
+            const t = document.querySelector(a.getAttribute('href'));
+            if (t) {
+                e.preventDefault();
+                const offset = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 64;
+                window.scrollTo({ top: t.getBoundingClientRect().top + scrollY - offset, behavior: 'smooth' });
+            }
+        });
+    });
+
+    /* ── AUTO-UPDATE COPYRIGHT YEAR ── */
+    document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
